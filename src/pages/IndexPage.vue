@@ -1,25 +1,47 @@
 <template>
   <q-page padding>
-    <input v-model="message" @keyup="handleKeyUp"/>
-    <button @click="clearMessage" >Clear Text</button>
-    <h5>{{ message }}</h5>
+    <input
+      v-model="message"
+      @keyup.esc="clearMessage"
+      @keyup.enter="alertMessage"
+    />
+
+    <button @click="clearMessage">Clear Text</button>
+
+    <h5 v-if="message.length" class="wrapper">{{ message }}</h5>
+
+    <h6 v-else>No message written</h6>
+
+    <hr />
+
+    <p>Uppercase message: {{ uppercaseMessage() }}</p>
   </q-page>
 </template>
 
-<script lang="ts">
-  export default {
-    data(){
-       return {
-         message: "I am VueJS!"
-       }
+<script>
+export default {
+  data() {
+    return {
+      message: 'I am VueJS!',
+    };
+  },
+  methods: {
+    clearMessage() {
+      this.message = '';
     },
-    methods:{
-      clearMessage(){
-        this.message = ''
-      },
-      handleKeyUp(event){
-        console.log(event)
-      }
-    }
-  }
+    alertMessage() {
+      alert(this.message);
+    },
+    uppercaseMessage() {
+      return this.message.toUpperCase();
+    },
+  },
+};
 </script>
+
+<style>
+.wrapper {
+  border: 5px double gray;
+  padding: 10px;
+}
+</style>
