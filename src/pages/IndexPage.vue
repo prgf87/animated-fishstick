@@ -30,12 +30,22 @@
     <hr />
     <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
     <div class="rug">
+      <div class="col">
+        <img
+          class="userPic"
+          :class="gender"
+          :src="picture"
+          :alt="`${firstName} ${lastName}`"
+        />
+        <button :class="gender" class="btn1" v-on:click="getUser()">
+          Generate Random User
+        </button>
+      </div>
       <div>
         <h1>{{ firstName }} {{ lastName }}</h1>
         <h3>{{ counter }}</h3>
         <h2>Email: {{ email }}</h2>
       </div>
-      <img class="userPic" :src="picture" :alt="`${firstName} ${lastName}`" />
     </div>
   </q-page>
 </template>
@@ -49,13 +59,12 @@ export default {
       firstName: 'John',
       lastName: 'Doe',
       email: 'user@email.com',
-      gender: 'Male',
+      gender: 'male',
       picture: 'https://thispersondoesnotexist.com/',
     };
   },
   computed: {
     uppercaseMessage() {
-      console.log('messssss');
       return this.message.length + ' ' + this.message.toUpperCase();
     },
   },
@@ -68,6 +77,18 @@ export default {
     },
     lowercaseMessage(value) {
       return this.message.length + ' ' + value.toLowerCase();
+    },
+    async getUser() {
+      console.log('hello');
+      const res = await fetch('https://thispersondoesnotexist.com/', {
+        method: 'GET',
+        mode: 'no-cors',
+      });
+      console.log(res);
+      // this.firstName = 'Trevor';
+      // this.lastName = 'Moonsabre';
+      // this.email = 'user@email.com';
+      // this.gender = 'male';
     },
   },
   directives: {
@@ -148,6 +169,14 @@ img {
   border-radius: 3px;
   color: white;
 }
+.btn1 {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 3px;
+  width: 250px;
+}
 
 .userPic {
   height: 175px;
@@ -160,6 +189,11 @@ img {
   display: flex;
   justify-items: center;
   align-items: center;
+}
+
+.col {
+  display: grid;
+  margin-left: calc(15%);
 }
 
 button {
@@ -178,5 +212,9 @@ button:focus {
 
 button:hover {
   transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 </style>
