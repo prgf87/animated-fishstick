@@ -60,7 +60,7 @@ export default {
       lastName: 'Doe',
       email: 'user@email.com',
       gender: 'male',
-      picture: 'https://thispersondoesnotexist.com/',
+      picture: 'https://randomuser.me/api/portraits/men/50.jpg',
     };
   },
   computed: {
@@ -79,16 +79,19 @@ export default {
       return this.message.length + ' ' + value.toLowerCase();
     },
     async getUser() {
-      console.log('hello');
-      const res = await fetch('https://thispersondoesnotexist.com/', {
+      // console.log('hello');
+      const res = await fetch('https://randomuser.me/api/', {
         method: 'GET',
-        mode: 'no-cors',
       });
       console.log(res);
-      // this.firstName = 'Trevor';
-      // this.lastName = 'Moonsabre';
-      // this.email = 'user@email.com';
-      // this.gender = 'male';
+      const body = await res.json();
+      const result = body.results[0];
+      console.log(result);
+      this.firstName = result.name.first;
+      this.lastName = result.name.last;
+      this.email = result.email;
+      this.gender = result.gender;
+      this.picture = result.picture.large;
     },
   },
   directives: {
