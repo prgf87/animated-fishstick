@@ -35,7 +35,7 @@
     <hr />
     <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
     <div class="rug">
-      <div class="grid mx-auto w-screen">
+      <div class="grid mx-auto w-1/3">
         <img
           class="userPic"
           :class="gender"
@@ -49,7 +49,7 @@
           </button>
         </div>
       </div>
-      <div class="grid mx-auto w-screen">
+      <div class="grid mx-auto w-2/3">
         <h1>{{ firstName }} {{ lastName }}</h1>
         <h2>Email: {{ email }}</h2>
       </div>
