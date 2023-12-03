@@ -1,6 +1,8 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
+  "include": ["src"],
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "outDir": "./build"
   }
 }
