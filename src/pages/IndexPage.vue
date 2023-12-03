@@ -1,20 +1,23 @@
 <template>
   <q-page padding>
-    <button
-      class="btn"
-      style="position: absolute; right: 20px"
-      @click="counter++"
-    >
-      {{ counter }}
-    </button>
-    <input
+    <div class="flex justify-around">
+
+      <input
       v-model="message"
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       v-autofocus
-      ref="inputField"
-      class="input"
+    ref="inputField"
+    class="input"
     />
+    <button
+    class="btn ml-10"
+    
+    @click="counter++"
+    >
+    {{ counter }}
+  </button>
+  </div>
 
     <button @click="clearMessage">Clear Text</button>
 
@@ -23,14 +26,16 @@
     <h6 v-else>No message written</h6>
 
     <hr />
+    <div class="space-y-4 py-8">
 
-    <p>Uppercase message: {{ uppercaseMessage }}</p>
-    <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
+      <p>Uppercase message: {{ uppercaseMessage }}</p>
+      <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
+    </div>
 
     <hr />
     <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
     <div class="rug">
-      <div class="grid mx-auto w-1/3">
+      <div class="grid mx-auto w-screen">
         <img
           class="userPic"
           :class="gender"
@@ -44,9 +49,8 @@
           </button>
         </div>
       </div>
-      <div class="grid mx-auto w-2/3">
+      <div class="grid mx-auto w-screen">
         <h1>{{ firstName }} {{ lastName }}</h1>
-        <h3 class="border-gray-950 border-8 border-dashed">{{ counter }}</h3>
         <h2>Email: {{ email }}</h2>
       </div>
     </div>
