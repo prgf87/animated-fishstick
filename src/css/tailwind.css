@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+.xyz-hidden {
+@apply hidden;
+}
+@tailwind utilities;
