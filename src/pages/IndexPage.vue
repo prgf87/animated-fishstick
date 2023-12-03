@@ -1,20 +1,23 @@
 <template>
   <q-page padding>
-    <button
-      class="btn"
-      style="position: absolute; right: 20px"
-      @click="counter++"
-    >
-      {{ counter }}
-    </button>
-    <input
+    <div class="flex justify-around">
+
+      <input
       v-model="message"
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       v-autofocus
-      ref="inputField"
-      class="input"
+    ref="inputField"
+    class="input"
     />
+    <button
+    class="btn ml-10"
+    
+    @click="counter++"
+    >
+    {{ counter }}
+  </button>
+  </div>
 
     <button @click="clearMessage">Clear Text</button>
 
@@ -23,27 +26,31 @@
     <h6 v-else>No message written</h6>
 
     <hr />
+    <div class="space-y-4 py-8">
 
-    <p>Uppercase message: {{ uppercaseMessage }}</p>
-    <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
+      <p>Uppercase message: {{ uppercaseMessage }}</p>
+      <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
+    </div>
 
     <hr />
     <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
     <div class="rug">
-      <div class="col">
+      <div class="grid mx-auto w-1/3">
         <img
           class="userPic"
           :class="gender"
           :src="picture"
           :alt="`${firstName} ${lastName}`"
         />
-        <button :class="gender" class="btn1" v-on:click="getUser()">
-          Generate Random User
-        </button>
+        <div class="flex justify-center items-center">
+
+          <button :class="gender" class="btn1" v-on:click="getUser()">
+            Generate Random User
+          </button>
+        </div>
       </div>
-      <div>
+      <div class="grid mx-auto w-2/3">
         <h1>{{ firstName }} {{ lastName }}</h1>
-        <h3>{{ counter }}</h3>
         <h2>Email: {{ email }}</h2>
       </div>
     </div>
