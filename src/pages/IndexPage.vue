@@ -30,20 +30,23 @@
     <hr />
     <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
     <div class="rug">
-      <div class="col">
+      <div class="grid mx-auto w-1/3">
         <img
           class="userPic"
           :class="gender"
           :src="picture"
           :alt="`${firstName} ${lastName}`"
         />
-        <button :class="gender" class="btn1" v-on:click="getUser()">
-          Generate Random User
-        </button>
+        <div class="flex justify-center items-center">
+
+          <button :class="gender" class="btn1" v-on:click="getUser()">
+            Generate Random User
+          </button>
+        </div>
       </div>
-      <div>
+      <div class="grid mx-auto w-2/3">
         <h1>{{ firstName }} {{ lastName }}</h1>
-        <h3>{{ counter }}</h3>
+        <h3 class="border-gray-950 border-8 border-dashed">{{ counter }}</h3>
         <h2>Email: {{ email }}</h2>
       </div>
     </div>
