@@ -1,63 +1,68 @@
 <template>
   <q-page padding>
-    <div class="flex justify-around">
+    <div>
 
-      <input
-      v-model="message"
-      @keyup.esc="clearMessage"
-      @keyup.enter="alertMessage"
-      v-autofocus
-    ref="inputField"
-    class="input"
-    />
-    <button
-    class="btn ml-10"
-    
-    @click="counter++"
-    >
-    {{ counter }}
-  </button>
-  </div>
-
-    <button @click="clearMessage">Clear Text</button>
-
-    <h3 v-if="message.length" class="wrapper">{{ message }}</h3>
-
-    <h6 v-else>No message written</h6>
-
-    <hr />
-    <div class="space-y-4 py-8">
-
-      <p>Uppercase message: {{ uppercaseMessage }}</p>
-      <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
-    </div>
-
-    <hr />
-    <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
-    <div class="rug">
-      <div class="grid mx-auto w-1/3">
-        <img
-          class="userPic"
-          :class="gender"
-          :src="picture"
-          :alt="`${firstName} ${lastName}`"
+      <div class="flex justify-around">
+  
+        <input
+        v-model="message"
+        @keyup.esc="clearMessage"
+        @keyup.enter="alertMessage"
+        v-autofocus
+        ref="inputField"
+        class="input"
+        :class="{'error': message.length > 22}"
         />
-        <div class="flex justify-center items-center">
-
-          <button :class="gender" class="btn1" v-on:click="getUser()">
-            Generate Random User
-          </button>
-        </div>
+        <!-- v-bind:class="{'error': message.length > 22}" -->
+        <button
+          class="btn ml-10"        
+          @click="counter++"
+          >
+          {{ counter }}
+        </button>
       </div>
-      <div class="grid mx-auto w-2/3">
-        <h1>{{ firstName }} {{ lastName }}</h1>
-        <h2>Email: {{ email }}</h2>
+  
+      <button @click="clearMessage">Clear Text</button>
+  
+      <h3 v-if="message.length" class="wrapper">{{ message }}</h3>
+  
+      <h6 v-else class="wrapper">No message written</h6>
+  
+      <hr />
+      <div class="space-y-4 py-8">
+  
+        <p>Uppercase message: {{ uppercaseMessage }}</p>
+        <p>Lowercase message: {{ lowercaseMessage(message) }}</p>
+      </div>
+  
+      <hr />
+      <!-- v-bind: is the directive, but you can shorten it by just using the semicolon -->
+      <div class="rug">
+        <div class="grid mx-auto w-1/3">
+          <img
+            class="userPic"
+            :class="gender"
+            :src="picture"
+            :alt="`${firstName} ${lastName}`"
+          />
+          <div class="flex justify-center items-center">
+  
+            <button :class="gender" class="btn1" v-on:click="getUser()">
+              Generate Random User
+            </button>
+          </div>
+        </div>
+        <div class="grid mx-auto w-2/3">
+          <h1>{{ firstName }} {{ lastName }}</h1>
+          <h2>Email: {{ email }}</h2>
+        </div>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -74,6 +79,7 @@ export default {
     uppercaseMessage() {
       return this.message.length + ' ' + this.message.toUpperCase();
     },
+   
   },
   methods: {
     clearMessage() {
@@ -109,6 +115,30 @@ export default {
       },
     },
   },
+  beforeCreate(){
+    console.log('before create function')
+  },
+  created(){
+    console.log('created function')
+  },
+  beforeMount(){
+    console.log('beforeMount function')
+  },
+  mounted(){
+    console.log('mounted function')
+  },
+  beforeUpdate(){
+    console.log('before update function')  
+  },  
+  onUpdated(){
+    console.log('update function');
+  },
+  beforeUnmount(){
+    console.log('before destroyed function')
+  },
+  unmounted(){
+    console.log('unmounted function')
+  }
 };
 </script>
 
@@ -122,6 +152,8 @@ export default {
 html,
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+
 }
 
 /* #app {
@@ -162,11 +194,14 @@ img {
 
 .input {
   padding: 0.4rem 0.9rem;
+  font-size: 24px;
 }
 
 .wrapper {
   border: 5px double slategray;
   padding: 10px;
+  background: yellow;
+  width: 350px;
 }
 
 .btn {
@@ -206,12 +241,16 @@ img {
   margin-left: calc(15%);
 }
 
+.error{
+  color: red;
+  background: pink;
+}
+
 button {
   cursor: pointer;
   display: inline-block;
   background: #333;
   color: white;
-  font-size: 18px;
   border: 0;
   padding: 0.3rem 0.9rem;
 }
